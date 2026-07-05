@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Tally Counter</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="light">
+
+<div id="app">
+
+  <!-- Header -->
+  <div id="header">
+    <button id="historyBtn" class="icon-btn" aria-label="History">📋</button>
+    <div id="counterName" class="counter-name">Counter 1</div>
+    <button id="settingsBtn" class="icon-btn" aria-label="Settings">⚙️</button>
+  </div>
+
+  <!-- Main count area — tap anywhere here = +1 -->
+  <div id="countArea" role="button" aria-label="Tap to count">
+    <div id="progressRing" class="hidden">
+      <svg viewBox="0 0 120 120" aria-hidden="true">
+        <circle class="ring-bg" cx="60" cy="60" r="54"/>
+        <circle id="ringFill" class="ring-fill" cx="60" cy="60" r="54"/>
+      </svg>
+    </div>
+    <div id="countDisplay">0</div>
+    <div id="targetLabel" class="hidden"></div>
+    <div id="tapHint">Tap to count</div>
+  </div>
+
+  <!-- Action bar -->
+  <div id="actionBar">
+    <button id="decrementBtn" class="action-btn" aria-label="Decrease">−</button>
+    <button id="resetBtn"     class="action-btn reset-btn" aria-label="Reset">Reset</button>
+    <button id="incrementBtn" class="action-btn primary-btn" aria-label="Increase">+</button>
+  </div>
+
+  <!-- Counter tab bar -->
+  <div id="tabBar">
+    <button id="addCounterBtn" class="tab-btn add-tab" aria-label="Add counter">＋</button>
+  </div>
+
+</div>
+
+<!-- ── Settings panel ───────────────────────────────────────────────────── -->
+<div id="settingsOverlay" class="overlay hidden"></div>
+<div id="settingsPanel" class="panel hidden" role="dialog" aria-label="Settings">
+  <div class="panel-handle"></div>
+  <h3>Settings</h3>
+
+  <div class="setting-row">
+    <label for="nameInput">Counter Name</label>
+    <input type="text" id="nameInput" maxlength="20" placeholder="e.g. Tasbeeh">
+  </div>
+
+  <div class="setting-row">
+    <label for="targetInput">Target Count <span class="muted">(0 = none)</span></label>
+    <input type="number" id="targetInput" min="0" max="999999" placeholder="0">
+  </div>
+
+  <div class="setting-row">
+    <label for="stepInput">Step Size</label>
+    <input type="number" id="stepInput" min="1" max="1000" placeholder="1">
+  </div>
+
+  <div class="setting-row toggle-row">
+    <label>Sound</label>
+    <div id="soundToggle" class="toggle" role="switch"></div>
+  </div>
+
+  <div class="setting-row toggle-row">
+    <label>Vibration</label>
+    <div id="vibToggle" class="toggle" role="switch"></div>
+  </div>
+
+  <div class="setting-row toggle-row">
+    <label>Keep Screen On</label>
+    <div id="wakeLockToggle" class="toggle" role="switch"></div>
+  </div>
+
+  <div class="setting-row">
+    <label>Theme</label>
+    <div id="themeSelector">
+      <button class="theme-btn active" data-theme="light">Light</button>
+      <button class="theme-btn" data-theme="dark">Dark</button>
+      <button class="theme-btn" data-theme="spiritual">Spiritual</button>
+      <button class="theme-btn" data-theme="gym">Gym</button>
+    </div>
+  </div>
+
+  <button id="saveSettingsBtn" class="save-btn">Save</button>
+  <button id="deleteCounterBtn" class="delete-btn">Delete This Counter</button>
+</div>
+
+<!-- ── History panel ─────────────────────────────────────────────────────── -->
+<div id="historyOverlay" class="overlay hidden"></div>
+<div id="historyPanel" class="panel hidden" role="dialog" aria-label="Session history">
+  <div class="panel-handle"></div>
+  <h3 id="historyTitle">Session History</h3>
+  <div id="historyList"></div>
+  <button id="clearHistoryBtn" class="delete-btn">Clear History</button>
+</div>
+
+<!-- ── Reset confirmation modal ──────────────────────────────────────────── -->
+<div id="resetOverlay" class="overlay hidden"></div>
+<div id="resetModal" class="modal hidden" role="alertdialog">
+  <p>Reset counter to 0?</p>
+  <div class="modal-actions">
+    <button id="resetCancelBtn">Cancel</button>
+    <button id="resetConfirmBtn" class="danger-btn">Reset</button>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
